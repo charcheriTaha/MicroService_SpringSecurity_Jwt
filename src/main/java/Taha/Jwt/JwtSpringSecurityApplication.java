@@ -17,7 +17,6 @@ import Taha.Jwt.ServicesInterfaces.AccountServices;
 
 @SpringBootApplication
 public class JwtSpringSecurityApplication implements CommandLineRunner {
-// CommandLineRunner elle va me permettre d'exécuter la méthode run aprés léxécution du projet 
 	@Autowired
 	TaskRepository TR;
 	@Autowired
@@ -26,9 +25,7 @@ public class JwtSpringSecurityApplication implements CommandLineRunner {
 	public static void main(String[] args) {
 		SpringApplication.run(JwtSpringSecurityApplication.class, args);
 	}
-	/* l'orsque lapplication est démarer toute méthode quii utilise l'annotation Bean va s'exécuter et lorsque ils sont exécuter le 
-	 * résultat devient un bean spring et ====> donc on peut l'injecter partout 
-	*/
+	
     @Bean
 	public BCryptPasswordEncoder getBCPE() {
 		return new BCryptPasswordEncoder();

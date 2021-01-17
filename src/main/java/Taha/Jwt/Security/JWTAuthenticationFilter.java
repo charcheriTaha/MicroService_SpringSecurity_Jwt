@@ -40,9 +40,7 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 		 AppUser appUser =null ;
 	        try {
 	            appUser= new ObjectMapper().readValue(request.getInputStream(),AppUser.class);
-	            /*request.getInputStream() retourner la requette et la stocker ou désiérializer dans AppUser */
-	            /*ObjectMapper() permet de prendre des objets json et les stoker d=ans un objet java */
-	            
+	           
 	            System.out.println("JWT***************************************");
 	    		System.out.println("username :"+appUser.getUsername());
 	    		System.out.println("password :"+appUser.getPassword());
@@ -57,13 +55,6 @@ public class JWTAuthenticationFilter extends UsernamePasswordAuthenticationFilte
 	    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response,
 	                                          FilterChain chain, Authentication authResult) throws IOException, ServletException {
 	       
-	    	 /* 
-	    	User user=(User)authResult.getPrincipal();
-	        List<String> roles=new ArrayList<>();
-	        authResult.getAuthorities().forEach(a->{
-	            roles.add(a.getAuthority());
-	        });
-	        */
 	        User user=(User)authResult.getPrincipal();
 	        String jwt= Jwts.builder()
 	                .setSubject(user.getUsername())

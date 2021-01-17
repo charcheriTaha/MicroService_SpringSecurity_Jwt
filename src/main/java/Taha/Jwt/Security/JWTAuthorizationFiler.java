@@ -46,24 +46,9 @@ public class JWTAuthorizationFiler extends OncePerRequestFilter {
 
 		
 			Claims claims = Jwts.parser().setSigningKey(SecurityConstants.SECRET)
-					.parseClaimsJws(jwtToken.replace(SecurityConstants.TOKEN_PREFIX, "")).getBody(); // récupérer le
-																										// contenu de
-																										// token aprés
-																										// avoir enlever
-																										// le prefix
-
-			String username = claims.getSubject();// getSubject() ça represente usernames
+					.parseClaimsJws(jwtToken.replace(SecurityConstants.TOKEN_PREFIX, "")).getBody(); 
+			String username = claims.getSubject();
 			ArrayList<Map<String, String>> roles = (ArrayList<Map<String, String>>) claims.get("roles");
-
-			/*
-			 * JWTVerifier verifier =
-			 * JWT.require(Algorithm.HMAC256(SecurityConstants.SECRET)).build(); String jwt
-			 * = jwtToken.substring(SecurityConstants.HEADER_PREFIX.length()); DecodedJWT
-			 * decodedJWT = verifier.verify(jwt); System.out.println("JWT="+jwt); String
-			 * username = decodedJWT.getSubject(); List<String> roles =
-			 * decodedJWT.getClaims().get("roles").asList(String.class);
-			 * System.out.println("username="+username); System.out.println("roles="+roles);
-			 */
 
 			Collection<GrantedAuthority> authorities = new ArrayList<>();
 			roles.forEach(r -> {
@@ -71,8 +56,7 @@ public class JWTAuthorizationFiler extends OncePerRequestFilter {
 			});
 			UsernamePasswordAuthenticationToken authenticationUser = new UsernamePasswordAuthenticationToken(username,
 					null, authorities);
-			SecurityContextHolder.getContext().setAuthentication(authenticationUser);// charger l'utilisateur
-																						// authentifier
+			SecurityContextHolder.getContext().setAuthentication(authenticationUser);
 			filterChain.doFilter(request, response);
 		}
 

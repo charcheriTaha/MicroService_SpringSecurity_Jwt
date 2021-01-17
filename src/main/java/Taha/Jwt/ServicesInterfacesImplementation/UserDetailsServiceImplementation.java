@@ -21,17 +21,6 @@ public class UserDetailsServiceImplementation implements UserDetailsService {
 	@Autowired
 	private AccountServices accountServices;
 
-	/*
-	 * cette clase va implementer l'interface UserDetailsService et cette classe va
-	 * redéfinier une seul méthode qui est loadUserByUsername plus précéssément le
-	 * SpringSecurityFilterChain lors de l'authentification va automatiquement
-	 * appeler cette méthode de UserDetailsServiceImplementation loadUserByUsername
-	 * retourn un objet de type user de spring qui est un objet d'une classe user de
-	 * spring qui implémente l'interface UserDetails
-	 * 
-	 * les roles dans springSecurity sont des objet de type GrantedAuthority
-	 */
-
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 		// TODO Auto-generated method stub
@@ -44,7 +33,7 @@ public class UserDetailsServiceImplementation implements UserDetailsService {
 		});
 
 		return new User(user.getUsername(), user.getPassword(), authorities);
-		/* voir importe DE User en haut */
+		
 	}
 
 }
